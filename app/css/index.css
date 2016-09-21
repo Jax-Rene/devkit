@@ -1,0 +1,78 @@
+.config-h1 {
+    padding: 10px;
+    font-family:monospace;
+    color:#5cb85c;
+}
+
+.config-h1:before{
+	content: "/* ";
+}
+
+.config-h1:after{
+	content: " */";
+}
+
+.config-h2 {
+    display: inline-block;
+    font-family:monospace;
+    font-size: 20px;
+    color:#5cb85c;
+}
+
+.config-h2:before{
+	content: "// ";
+}
+
+.top-dashed{
+	border-top:outset 1px;
+}
+
+.shadow{
+    box-shadow: 5px 5px 60px #d0cece;
+}
+
+.shadow{
+	box-shadow: 0px 5px 60px #d0cece;
+}
+
+.result{
+	color: red;
+}
+
+.divider{
+	height: 100px;
+}
+
+.main-panel{
+	padding:20px;
+}
+
+.panel-4{
+	display: inline-table;
+	width: 40%;
+}
+
+.panel-4-button{
+	margin:10px;
+	width:92%;
+}
+
+.panel-5{
+	display: inline-table;
+	width: 50%;
+}
+
+.title-span{
+	display: block;
+	color:#c1c1c1;
+	font-size:15px;
+	padding:10px;
+}
+
+.section{
+	margin-top:50px;
+}
+
+.tab-ul{
+	padding:60px;
+}

@@ -1,0 +1,27 @@
+{
+  "name": "devkit",
+  "version": "1.0.0",
+  "description": "A userful tolls kit for developer such as encode decode and translation between timestamp and date and so on",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
+  "keywords": [
+    "Electron",
+    "tools",
+    "dev"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "devDependencies": {
+    "electron": "^1.3.4"
+  }
+}
