@@ -18,7 +18,8 @@
                 <nav class="tab-ul">
                     <ul>
                         <li><a href="#section-circle-1"><span class="fa fa-key fa-lg">&nbsp;code</span></a></li>
-                        <li><a href="#section-circle-2" class="fa fa-internet-explorer fa-lg"><span>&nbsp;url</span></a></li>
+                        <li><a href="#section-circle-2" class="fa fa-internet-explorer fa-lg"><span>&nbsp;url</span></a>
+                        </li>
                         <li><a href="#section-circle-3" class="fa fa-calendar fa-lg"><span>&nbsp;calendar</span></a></li>
                         <li><a href="#section-circle-4" class="fa fa-hand-grab-o fa-lg"><span>&nbsp;random</span></a></li>
                         <li><a href="#section-circle-5" class="fa fa-eraser fa-lg"><span>other</span></a></li>
@@ -59,7 +60,8 @@
                             <div class="input-group">
                                 <input type="text" placeholder="输入要转换的时间（yyyy-MM-dd hh:mm:ss）或者时间戳" class="form-control" id="date-origin" />
                                 <span class="input-group-btn">
-									<input type="button" class="btn btn-success" value="转换" id="convert-date">
+									<input type="button" class="btn btn-success convert-time" value="秒" id="second">
+									<input type="button" class="btn btn-success convert-time" value="毫秒" id="msecond">
 								</span>
                             </div>
                             <span id='date-result' class='result'></span>
@@ -107,9 +109,12 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="btn-group">
-                                            <button type="button" id="random-boolean" class="btn btn-default random">随机布尔</button>
-                                            <button type="button" id="random-date" class="btn btn-default random">随机日期</button>
-                                            <button type="button" id="random-str" class="btn btn-default random">随机字符串</button>
+                                            <button type="button" id="random-boolean" class="btn btn-default random">随机布尔
+                                            </button>
+                                            <button type="button" id="random-date" class="btn btn-default random">随机日期
+                                            </button>
+                                            <button type="button" id="random-str" class="btn btn-default random">随机字符串
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +166,23 @@
             $('#encode-result').text('生成结果已复制到黏贴板上');
         });
 
-        $('#convert-date').click(function() {
+        $('.convert-time').click(function() {
             var regex = new RegExp('^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[ 0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29) [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$'),
                 originDate = $('#date-origin').val(),
                 time;
             if (regex.test(originDate)) {
                 time = new Date(originDate).getTime();
+                if (this.id == 'second') {
+                    time /= 1000;
+                }
             } else {
-                time = new Date(parseInt(originDate)).format('yyyy-MM-dd hh:mm:ss');
+            	originDate = parseInt(originDate);
+                if (this.id == 'second') {
+                    originDate  * 1000;
+                }
+                time = new Date(originDate).format('yyyy-MM-dd hh:mm:ss');
             }
+
             $('#date-origin').val(time);
             clipboard.writeText(time.toString());
             $('#date-result').text('生成结果已复制到黏贴板上');
@@ -177,13 +190,13 @@
 
         Date.prototype.format = function(format) {
             var o = {
-                "M+": this.getMonth() + 1, //month 
-                "d+": this.getDate(), //day 
-                "h+": this.getHours(), //hour 
-                "m+": this.getMinutes(), //minute 
-                "s+": this.getSeconds(), //second 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter 
-                "S": this.getMilliseconds() //millisecond 
+                "M+": this.getMonth() + 1, //month
+                "d+": this.getDate(), //day
+                "h+": this.getHours(), //hour
+                "m+": this.getMinutes(), //minute
+                "s+": this.getSeconds(), //second
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
             }
             if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
                 (this.getFullYear() + "").substr(4 - RegExp.$1.length));
@@ -196,83 +209,85 @@
         }
 
 
-
-    //随机数
-    $('.random').click(function() {
-        var id = this.id;
-        if (id == 'random-number') {
-            var min = parseInt($('#random-min').val());
-            var max = parseInt($('#random-max').val());
-            if (isNaN(min) || isNaN(max))
-                $('#random-result').text('请输入区间范围');
-            else {
-                var res = generateRandomNum(min, max);
+        //随机数
+        $('.random').click(function() {
+            var id = this.id;
+            if (id == 'random-number') {
+                var min = parseInt($('#random-min').val());
+                var max = parseInt($('#random-max').val());
+                if (isNaN(min) || isNaN(max))
+                    $('#random-result').text('请输入区间范围');
+                else {
+                    var res = generateRandomNum(min, max);
+                    clipboard.writeText(res.toString());
+                    $('#random-result').text('随机数字: ' + res + ' 已复制到黏贴板');
+                }
+            } else if (id == 'random-boolean') {
+                var res = generateRandomBoolean();
                 clipboard.writeText(res.toString());
-                $('#random-result').text('随机数字: ' + res + ' 已复制到黏贴板');
+                $('#random-result').text('随机布尔值: ' + res + ' 已复制到黏贴板');
+            } else if (id == 'random-date') {
+                var res = new Date(generateRandomDate()).format('yyyy-MM-dd hh:mm:ss');
+                clipboard.writeText(res.toString());
+                $('#random-result').text('随机日期: ' + res + ' 已复制到黏贴板');
+            } else {
+                var res = generateRandomStr();
+                clipboard.writeText(res.toString());
+                $('#random-result').text('随机字符串: ' + res + ' 已复制到黏贴板');
             }
-        } else if (id == 'random-boolean') {
-            var res = generateRandomBoolean();
-            clipboard.writeText(res.toString());
-            $('#random-result').text('随机布尔值: ' + res + ' 已复制到黏贴板');
-        } else if (id == 'random-date') {
-            var res = new Date(generateRandomDate()).format('yyyy-MM-dd hh:mm:ss');
-            clipboard.writeText(res.toString());
-            $('#random-result').text('随机日期: ' + res + ' 已复制到黏贴板');
-        } else {
-        	var res = generateRandomStr();
-            clipboard.writeText(res.toString());
-            $('#random-result').text('随机字符串: ' + res + ' 已复制到黏贴板');
+        });
+
+        function updateTime(time) {
+            if (!time)
+                time = new Date().getTime();
+            else
+                time++;
+            var res = new Date(time);
+            $('#now').val(res.format('yyyy-MM-dd hh:mm:ss'));
+            setTimeout(updateTime, 1000);
         }
-    });
 
-    function updateTime(time) {
-        if (!time)
-            time = new Date().getTime();
-        else
-            time++;
-        var res = new Date(time);
-        $('#now').val(res.format('yyyy-MM-dd hh:mm:ss'));
-        setTimeout(updateTime, 1000);
-    }
-    updateTime();
-    $('#now-copy').click(function() {
-        var res = $('#now').val();
-        clipboard.writeText(res.toString());
-        $('#now-result').text('当前时间已复制到黏贴板');
-    });
+        updateTime();
+        $('#now-copy').click(function() {
+            var res = $('#now').val();
+            clipboard.writeText(res.toString());
+            $('#now-result').text('当前时间已复制到黏贴板');
+        });
 
 
-    function generateRandomNum(min, max) {
-        var range = max - min;
-        var rand = Math.random();
-        return (min + Math.round(rand * range));
-    }
+        function generateRandomNum(min, max) {
+            var range = max - min;
+            var rand = Math.random();
+            return (min + Math.round(rand * range));
+        }
 
-    function generateRandomBoolean() {
-        var rand = Math.random();
-        if (rand > 0.5)
-            return true;
-        else
-            return false;
-    }
+        function generateRandomBoolean() {
+            var rand = Math.random();
+            if (rand > 0.5)
+                return true;
+            else
+                return false;
+        }
 
-    function generateRandomDate() {
-        var base = 10000000000000;
-        var rand = Math.random();
-        return Math.round(base * rand);
-    }
+        function generateRandomDate() {
+            var base = 10000000000000;
+            var rand = Math.random();
+            return Math.round(base * rand);
+        }
 
-    function generateRandomStr(len) {　　
-        len = len || 32;　　
-        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/ 　　
-        var maxPos = $chars.length;　　
-        var pwd = '';　　
-        for (i = 0; i < len; i++) {　　　　
-            pwd += $chars.charAt(Math.floor(Math.random() * maxPos));　　
-        }　　
-        return pwd;
-    }
-    if (window.module) module = window.module;
+        function generateRandomStr(len) {
+            len = len || 32;
+            var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+            /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+            var maxPos = $chars.length;
+            var pwd = '';
+            for (i = 0; i < len; i++) {
+                pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+            }
+            return pwd;
+        }
+
+        if (window.module) module = window.module;
     });
     </script>
 </body>
