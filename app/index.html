@@ -16,13 +16,13 @@
         <section>
             <div class="tabs tabs-style-circle">
                 <nav class="tab-ul">
-                    <ul>
-                        <li><a href="#section-circle-1"><span class="fa fa-key fa-lg">&nbsp;code</span></a></li>
-                        <li><a href="#section-circle-2" class="fa fa-internet-explorer fa-lg"><span>&nbsp;url</span></a>
+                    <ul id="tab">
+                        <li id="tab1"><a href="#section-circle-1" class="fa fa-internet-explorer fa-lg"><span>&nbsp;code</span></a></li>
+                        <li id="tab2"><a href="#section-circle-2" class="fa fa-internet-explorer fa-lg"><span>&nbsp;url</span></a>
                         </li>
-                        <li><a href="#section-circle-3" class="fa fa-calendar fa-lg"><span>&nbsp;calendar</span></a></li>
-                        <li><a href="#section-circle-4" class="fa fa-hand-grab-o fa-lg"><span>&nbsp;random</span></a></li>
-                        <li><a href="#section-circle-5" class="fa fa-eraser fa-lg"><span>other</span></a></li>
+                        <li id="tab3"><a href="#section-circle-3" class="fa fa-calendar fa-lg"><span>&nbsp;calendar</span></a></li>
+                        <li id="tab4"><a href="#section-circle-4" class="fa fa-hand-grab-o fa-lg"><span>&nbsp;random</span></a></li>
+                        <li id="tab5"><a href="#section-circle-5" class="fa fa-eraser fa-lg"><span>other</span></a></li>
                     </ul>
                 </nav>
                 <div class="content-wrap main-panel top-dashed">
@@ -142,6 +142,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/md5.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
+    <script src="js/keymap.js"></script>
     <script type="text/javascript">
     $(function() {
         //tab
@@ -176,9 +177,9 @@
                     time /= 1000;
                 }
             } else {
-            	originDate = parseInt(originDate);
+                originDate = parseInt(originDate);
                 if (this.id == 'second') {
-                    originDate  * 1000;
+                    originDate * 1000;
                 }
                 time = new Date(originDate).format('yyyy-MM-dd hh:mm:ss');
             }
@@ -286,7 +287,6 @@
             }
             return pwd;
         }
-
         if (window.module) module = window.module;
     });
     </script>
