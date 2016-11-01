@@ -10,15 +10,15 @@ VS Code、Atom 等等软件均基于此构建。学习曲线低，官方文档�
 
 ## 软件界面
 
- ![1](README_IMG\1.jpg)
+ ![1](./README_IMG/1.jpg)
 
 
 
- ![2](README_IMG\2.jpg)
+ ![2](./README_IMG/2.jpg)
 
 
 
- ![3](README_IMG\3.jpg)
+ ![3](./README_IMG/3.jpg)
 
 
 
