@@ -1,6 +1,6 @@
  //键盘事件
  $(document).keydown(function(event) {
-     if (event.keyCode == 37 || event.keyCode == 39) {
+     if ((event.keyCode == 37 || event.keyCode == 39) && !$(':focus').length) {
          var cur = curTab();
          var next = event.keyCode == 37 ? cur - 1 : cur + 1;
          if (next == 0)
