@@ -24,6 +24,19 @@ VS Code、Atom 等等软件均基于此构建。学习曲线低，官方文档�
 
 ## 构建方法
 
+### 本机运行
+
+``` bash
+# 先安装electron
+npm install electron
+# cd 至project目录
+npm start
+```
+
+
+
+### 打包
+
 **需要环境：nodejs v4.0.0以上**
 
 ```bath 
@@ -42,7 +55,7 @@ npm run-script package
 现有功能比较简单，初次花了一天的时间熟悉以及开发，暂时满足简单使用。
 
 * MD5 加密计算
-* URLEncode
+* URL encode & decode
 * 时间工具
   * 时间戳转换
   * 获取当前时间工具

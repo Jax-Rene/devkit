@@ -41,11 +41,23 @@
                     </section>
                     <section id="section-circle-2">
                         <div>
-                            <h1 class="config-h1">URLencode</h1>
+                            <h1 class="config-h1">URL 工具</h1>
+                             <div class="text-left">
+                                <h2 class="config-h2">Url encode</h2>
+                            </div>
                             <div class="input-group">
                                 <input type="text" placeholder="输入待encode字符串" class="form-control" id="encode-origin" />
                                 <span class="input-group-btn">
 									<input type="button" class="btn btn-success" value="转换" id="convert-encode">
+								</span>
+                            </div>
+                            <div class="text-left">
+                                <h2 class="config-h2">Url decode</h2>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" placeholder="输入待decode字符串" class="form-control" id="decode-origin" />
+                                <span class="input-group-btn">
+									<input type="button" class="btn btn-success" value="转换" id="convert-decode">
 								</span>
                             </div>
                             <span id='encode-result' class='result'></span>
@@ -165,6 +177,13 @@
             $('#encode-origin').val(encoded);
             clipboard.writeText(encoded.toString());
             $('#encode-result').text('生成结果已复制到黏贴板上');
+        });
+
+        $('#convert-decode').click(function () {
+            var decoded = decodeURI($('#decode-origin').val());
+            $('#decode-origin').val(decoded);
+            clipboard.writeText(decoded.toString());
+            $('#encode-result').text('生成结果已复制到黏贴板上');        	
         });
 
         $('.convert-time').click(function() {
