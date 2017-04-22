@@ -27,17 +27,29 @@
                 </nav>
                 <div class="content-wrap main-panel top-dashed">
                     <section id="section-circle-1">
-                        <h1 class="config-h1">加密&解密</h1>
-                        <div class="text-left">
-                            <h2 class="config-h2">Md5计算</h2>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" placeholder="输入字符串,生成32位MD5" class="form-control" id="md5-origin" />
-                            <span class="input-group-btn">
-								<input type="button" class="btn btn-success" value="转换" id="convert-md5">
-							</span>
-                        </div>
-                        <span id='md5-result' class='result'></span>
+                        <dvi>
+                            <h1 class="config-h1">加密&解密</h1>
+                            <div class="text-left">
+                                <h2 class="config-h2">Md5计算</h2>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" placeholder="输入字符串,生成32位MD5" class="form-control" id="md5-origin" />
+                                <span class="input-group-btn">
+    								<input type="button" class="btn btn-success" value="转换" id="convert-md5">
+    							</span>
+                            </div>
+                            <div class="text-left">
+                                <h2 class="config-h2">Base64计算</h2>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" placeholder="输入字符串" class="form-control" id="base64-origin" />
+                                <span class="input-group-btn">
+                                    <input type="button" class="btn btn-danger" value="加密" id="encode-base64">
+                                    <input type="button" class="btn btn-success" value="解密" id="decode-base64">
+                                </span>
+                            </div>
+                            <span id='code-result' class='result'></span>
+                        </dvi>
                     </section>
                     <section id="section-circle-2">
                         <div>
@@ -169,8 +181,23 @@
             var _md5 = md5($('#md5-origin').val());
             $('#md5-origin').val(_md5);
             clipboard.writeText(_md5.toString());
-            $('#md5-result').text('生成结果已复制到黏贴板上');
+            $('#code-result').text('生成结果已复制到黏贴板上');
         });
+
+        $('#encode-base64').click(function () {
+            var _base64 = window.btoa($('#base64-origin').val());
+            $('#base64-origin').val(_base64);
+            clipboard.writeText(_base64.toString());
+            $('#code-result').text('生成结果已复制到黏贴板上');
+        });
+
+        $('#decode-base64').click(function () {
+            var _base64 = window.atob($('#base64-origin').val());
+            $('#base64-origin').val(_base64);
+            clipboard.writeText(_base64.toString());
+            $('#code-result').text('生成结果已复制到黏贴板上');
+        });
+
 
         $('#convert-encode').click(function() {
             var encoded = encodeURI($('#encode-origin').val());
