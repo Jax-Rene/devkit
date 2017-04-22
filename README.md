@@ -55,6 +55,7 @@ npm run-script package
 现有功能比较简单，初次花了一天的时间熟悉以及开发，暂时满足简单使用。
 
 * MD5 加密计算
+* BASE64 加密解密
 * URL encode & decode
 * 时间工具
   * 时间戳转换
